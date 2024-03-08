@@ -4,7 +4,7 @@ on:
     branches: [main]
 
 jobs:
-  flutter-masters-deploy:
+  flutter-masters-deploy-prod:
     runs-on: macos-latest
     env:
       public_variable: ${{vars.REGARD}}
@@ -13,7 +13,7 @@ jobs:
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin" # See 'Supported distributions' for available options
+          distribution: "temurin"
           java-version: "11"
 
       - name: COPY .
@@ -44,4 +44,41 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: apk-for-test
-          path: Built build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  flutter-masters-deploy-dev:
+    runs-on: macos-latest
+    environment: "production"
+    env:
+      public_variable: ${{vars.REGARD}}
+      secret_variable: ${{secrets.PASSWORD}}
+    steps:
+      - name: INSTALLING JAVA
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "11"
+
+      - name: COPY .
+        uses: actions/checkout@v4
+
+      - name: INSTALL FLUTTER
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: FLUTTER TEST
+        run: flutter test
+
+      - name: FLUTTER ANALYZE
+        run: flutter analyze
+
+      - name: CREATE ENV
+        run: mkdir env
+
+      - name: CREATE PROD.JSON
+        run: echo '{"name":"${{vars.REGARD}}"}' > prod.json
+        working-directory: env
+
+      - name: FLUTTER GENERATE IPA
+        run: flutter build ipa --no-codesign --dart-define-from-file=env/prod.json
