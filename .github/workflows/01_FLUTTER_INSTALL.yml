@@ -8,6 +8,12 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: INSTALLING JAVA
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin" # See 'Supported distributions' for available options
+          java-version: "11"
+
       - name: COPY .
         uses: actions/checkout@v4
 
@@ -18,6 +24,9 @@ jobs:
 
       - name: FLUTTER TEST
         run: flutter test
+
+      - name: FLUTTER ANALYZE
+        run: flutter analyze
 
       - name: FLUTTER ANALYZE
         run: flutter analyze
