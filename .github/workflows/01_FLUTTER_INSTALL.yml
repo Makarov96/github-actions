@@ -1,51 +1,50 @@
 name: 01-FLUTTER-INSTALL
 on:
-  pull_request:
+  push:
     branches: [main]
-    types: [closed]
 
 jobs:
-  flutter-masters-deploy-prod:
-    runs-on: macos-latest
-    env:
-      public_variable: ${{vars.REGARD}}
-      secret_variable: ${{secrets.PASSWORD}}
-    steps:
-      - name: INSTALLING JAVA
-        uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "11"
+  # flutter-masters-deploy-prod:
+  #   runs-on: macos-latest
+  #   env:
+  #     public_variable: ${{vars.REGARD}}
+  #     secret_variable: ${{secrets.PASSWORD}}
+  #   steps:
+  #     - name: INSTALLING JAVA
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         distribution: "temurin"
+  #         java-version: "11"
 
-      - name: COPY .
-        uses: actions/checkout@v4
+  #     - name: COPY .
+  #       uses: actions/checkout@v4
 
-      - name: INSTALL FLUTTER
-        uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
+  #     - name: INSTALL FLUTTER
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: "stable"
 
-      - name: FLUTTER TEST
-        run: flutter test
+  #     - name: FLUTTER TEST
+  #       run: flutter test
 
-      - name: FLUTTER ANALYZE
-        run: flutter analyze
+  #     - name: FLUTTER ANALYZE
+  #       run: flutter analyze
 
-      - name: CREATE ENV
-        run: mkdir env
+  #     - name: CREATE ENV
+  #       run: mkdir env
 
-      - name: CREATE DEV.JSON
-        run: echo '{"name":"${{vars.REGARD}}"}' > dev.json
-        working-directory: env
+  #     - name: CREATE DEV.JSON
+  #       run: echo '{"name":"${{vars.REGARD}}"}' > dev.json
+  #       working-directory: env
 
-      - name: FLUTTER GENERATE APK
-        run: flutter build apk --release --dart-define-from-file=env/dev.json
+  #     - name: FLUTTER GENERATE APK
+  #       run: flutter build apk --release --dart-define-from-file=env/dev.json
 
-      - name: UPLOAD APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-for-test
-          path: build/app/outputs/flutter-apk/app-release.apk
+  #     - name: UPLOAD APK
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: apk-for-test
+  #         path: build/app/outputs/flutter-apk/app-release.apk
 
   flutter-masters-deploy-dev:
     runs-on: macos-latest
@@ -82,7 +81,7 @@ jobs:
         working-directory: env
 
       - name: FLUTTER GENERATE IPA
-        run: flutter build ipa --release --no-codesign --dart-define-from-file=env/prod.json
+        run: flutter build ipa --release --dart-define-from-file=env/prod.json
       - name: UPLOAD IPA
         uses: actions/upload-artifact@v4
         with:
