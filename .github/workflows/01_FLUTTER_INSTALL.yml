@@ -14,5 +14,7 @@ jobs:
       - name: INSTALL FLUTTER
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable" # or: 'beta', 'dev', 'master' (or 'main')
-      - run: flutter --version
+          channel: "stable"
+
+      - name: FLUTTER TEST
+        run: flutter test
