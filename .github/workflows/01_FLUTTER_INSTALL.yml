@@ -1,0 +1,18 @@
+name: 01-FLUTTER-INSTALL
+on:
+  push:
+    branches: [main]
+
+jobs:
+  flutter-masters-deploy:
+    runs-on: macos-latest
+
+    steps:
+      - name: COPY .
+        uses: actions/checkout@v4
+
+      - name: INSTALL FLUTTER
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable" # or: 'beta', 'dev', 'master' (or 'main')
+      - run: flutter --version
