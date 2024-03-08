@@ -30,3 +30,13 @@ jobs:
 
       - name: FLUTTER ANALYZE
         run: flutter analyze
+
+      - name: CREATE ENV
+        run: mkdir env
+
+      - name: CREATE DEV.JSON
+        run: echo '{"name":"Hello mom from GA"}' > dev.json
+        working-directory: env
+
+      # - name: FLUTTER GENERATE APK
+      #   run: flutter analyze --release --dart-define-from-file=env/dev.json
