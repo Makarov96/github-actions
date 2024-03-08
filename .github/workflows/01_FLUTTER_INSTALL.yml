@@ -83,11 +83,11 @@ jobs:
       - name: FLUTTER GENERATE IPA
         run: flutter build ipa --no-codesign --dart-define-from-file=env/prod.json
 
-      - name: FLUTTER GENERATE IPA
-        run: flutter build ipa --no-codesign --export-options-plist="build/ios/archive/Runner.xcarchive/info.plist"
+      # - name: FLUTTER GENERATE IPA
+      #   run: flutter build ipa --no-codesign --export-options-plist="build/ios/archive/Runner.xcarchive/info.plist"
 
       - name: UPLOAD IPA
         uses: actions/upload-artifact@v4
         with:
           name: ipa-for-test
-          path: build/ios/archive/Runner.xcarchive
+          path: build/ios/archive/
