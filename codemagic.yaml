@@ -1,6 +1,7 @@
 workflows:
   hello-world:
-
+    environment:
+      flutter: stable
 
     triggering:
      events:
