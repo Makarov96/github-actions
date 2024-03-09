@@ -1,6 +1,20 @@
 workflows:
   hello-world:
+    instance_type: mac_mini
+
+    triggering:
+     events:
+       - "push"
+     branch_patterns:
+       - pattern: 'main'
+       - include: true
+         source: true
+
+         
     name: Hello world
+
     scripts:
       - name: Hello world
         script: echo 'Hello world'
+
+    
