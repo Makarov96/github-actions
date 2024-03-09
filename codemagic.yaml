@@ -32,3 +32,8 @@ workflows:
       - name: FLUTTER CREATE APK
         script: flutter build apk --release --dart-define-from-file=env/prod.json
 
+    publishing:
+      email:
+        recipients:
+          - estev97@gmail.com
+          - meedu.app@gmail.com
