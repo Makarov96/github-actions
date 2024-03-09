@@ -32,6 +32,9 @@ workflows:
       - name: FLUTTER CREATE APK
         script: flutter build apk --release --dart-define-from-file=env/prod.json
 
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      
     publishing:
       email:
         recipients:
