@@ -10,7 +10,6 @@ workflows:
        - include: true
          source: true
 
-
     name: Hello world
 
     scripts:
@@ -21,5 +20,11 @@ workflows:
         script: mkdir env
 
       - name: CREATE PROD.JSON
-        script: echo '{"name":"${{vars.REGARD}}"}' > env/prod.json
+        script: echo '{"name":"Hello world"}' > env/prod.json
+
+      - name: FLUTTER TESTS
+        script: flutter test
+
+      - name: FLUTTER ANALYZE
+        script: flutter analyze
 
