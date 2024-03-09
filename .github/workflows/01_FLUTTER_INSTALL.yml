@@ -1,6 +1,7 @@
 name: 01-FLUTTER-INSTALL
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [main]
 
 jobs:

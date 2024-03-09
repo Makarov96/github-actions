@@ -1,0 +1,6 @@
+workflows:
+  hello-world:
+    name: Hello world
+    scripts:
+      - name: Hello world
+        script: echo 'Hello world'
