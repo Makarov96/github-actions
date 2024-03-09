@@ -17,4 +17,9 @@ workflows:
       - name: Hello world
         script: echo 'change message'
 
-    
+      - name: CREATE ENV
+        script: mkdir env
+
+      - name: CREATE PROD.JSON
+        script: echo '{"name":"${{vars.REGARD}}"}' > env/prod.json
+
