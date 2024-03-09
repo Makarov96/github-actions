@@ -1,6 +1,6 @@
 workflows:
   hello-world:
-    instance_type: mac_mini
+
 
     triggering:
      events:
@@ -10,7 +10,7 @@ workflows:
        - include: true
          source: true
 
-         
+
     name: Hello world
 
     scripts:
