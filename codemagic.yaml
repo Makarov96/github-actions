@@ -8,7 +8,7 @@ workflows:
            - StevenProfileRef
         # certificates:
         #   - Sample
-        # bundle_identifier: com.example.sample
+         bundle_identifier: com.stevencol.sample
 
       groups:
         - "appstore_credentials"
