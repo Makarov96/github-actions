@@ -6,8 +6,7 @@ workflows:
         distribution_type: app_store
         provisioning_profiles:
           - Steven_Cer
-        certificates:
-          - Sample
+
         bundle_identifier: com.example.sample
 
       groups:
