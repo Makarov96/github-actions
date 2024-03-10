@@ -4,7 +4,12 @@ workflows:
       flutter: stable
       ios_signing:
         distribution_type: app_store
-        # bundle_identifier: com.example.sample
+        provisioning_profiles:
+          - Steven_Cer
+        certificates:
+          - Sample
+        bundle_identifier: com.example.sample
+      
 
       groups:
         - "appstore_credentials"
