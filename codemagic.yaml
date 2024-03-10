@@ -23,14 +23,12 @@ workflows:
       - name: CREATE PROD.JSON
         script: echo '{"name":"Hello world"}' > env/prod.json
 
-      # - name: FLUTTER TESTS
-      #   script: flutter test
+      - name: FLUTTER TESTS
+        script: flutter tes
 
-      # - name: FLUTTER ANALYZE
-      #   script: flutter analyze
+      - name: FLUTTER ANALYZE
+        script: flutter analyze
 
-      - name: FLUTTER CREATE IPA
-        script: flutter build ipa --debug --dart-define-from-file=env/prod.json
 
       - name: FLUTTER CREATE APK
         script: flutter build apk --release --dart-define-from-file=env/prod.json
@@ -39,8 +37,15 @@ workflows:
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
 
+    integrations:
+      app_store_connect: codemagic
+
     publishing:
       email:
         recipients:
           - estev97@gmail.com
           # - meedu.app@gmail.com
+      app_store_connect:
+         auth: integration
+         submit_to_testflight: true
+         
