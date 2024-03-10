@@ -20,6 +20,14 @@ workflows:
     name: Hello world
 
     scripts:
+
+      - name: KEYCHAIN INIT
+        script: keychain initialize
+      - name: ADD CERTS
+        script: keychain add-certificates
+      - name: USE PROFILES
+        script: xcode-project use-profiles
+        
       - name: Hello world
         script: echo 'change message'
 
@@ -35,12 +43,6 @@ workflows:
       - name: FLUTTER ANALYZE
         script: flutter analyze
 
-      - name: KEYCHAIN INIT
-        script: keychain initialize
-      - name: ADD CERTS
-        script: keychain add-certificates
-      - name: USE PROFILES
-        script: xcode-project use-profiles
 
 
       # - name: FLUTTER CREATE APK
