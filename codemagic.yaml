@@ -57,7 +57,7 @@ workflows:
     #   - build/app/outputs/flutter-apk/app-release.apk
 
     integrations:
-      app_store_connect: codemagic
+      app_store_connect: steven-colocho-apple-store
 
     publishing:
       # email:
