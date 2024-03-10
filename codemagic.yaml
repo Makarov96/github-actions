@@ -9,7 +9,6 @@ workflows:
         certificates:
           - Sample
         bundle_identifier: com.example.sample
-      
 
       groups:
         - "appstore_credentials"
