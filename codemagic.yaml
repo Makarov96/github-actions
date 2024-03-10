@@ -29,11 +29,12 @@ workflows:
       - name: FLUTTER ANALYZE
         script: flutter analyze
 
+      - name: FLUTTER CREATE IPA
+        script: flutter build ipa --debug --dart-define-from-file=env/prod.json
+
       - name: FLUTTER CREATE APK
         script: flutter build apk --release --dart-define-from-file=env/prod.json
 
-      - name: FLUTTER CREATE IPA
-        script: flutter build ipa --release --dart-define-from-file=env/prod.json
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
@@ -42,4 +43,4 @@ workflows:
       email:
         recipients:
           - estev97@gmail.com
-          - meedu.app@gmail.com
+          # - meedu.app@gmail.com
