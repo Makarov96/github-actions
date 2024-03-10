@@ -2,12 +2,12 @@ workflows:
   hello-world:
     environment:
       flutter: stable
-      ios_signing:
-        distribution_type: app_store
+      # ios_signing:
+      #   distribution_type: app_store
         # provisioning_profiles:
         #   - Steven_Cer
-        certificates:
-          - Sample
+        # certificates:
+        #   - Sample
         # bundle_identifier: com.example.sample
 
       groups:
