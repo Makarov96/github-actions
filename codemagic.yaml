@@ -5,7 +5,7 @@ workflows:
       ios_signing:
          distribution_type: app_store
          provisioning_profiles:
-           - StevenProfileRef
+           - StevenProfileRefProd
         # certificates:
         #   - Sample
         #  bundle_identifier: com.stevencol.sample
