@@ -2,6 +2,12 @@ workflows:
   hello-world:
     environment:
       flutter: stable
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.example.sample
+
+      groups:
+        - "appstore_credentials"
 
     triggering:
      events:
@@ -29,23 +35,34 @@ workflows:
       - name: FLUTTER ANALYZE
         script: flutter analyze
 
+      - name: KEYCHAIN INIT
+        script: keychain initialize
+      - name: ADD CERTS
+        script: keychain add-certificates
+      - name: USE PROFILES
+        script: xcode-project use-profiles
 
-      - name: FLUTTER CREATE APK
-        script: flutter build apk --release --dart-define-from-file=env/prod.json
 
+      # - name: FLUTTER CREATE APK
+      #   script: flutter build apk --release --dart-define-from-file=env/prod.json
+      - name: FLUTTER CREATE IPA
+        script: flutter build ipa --release --dart-define-from-file=env/prod.json
 
-    artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+    # artifacts:
+    #   - build/app/outputs/flutter-apk/app-release.apk
 
     integrations:
       app_store_connect: codemagic
 
     publishing:
-      email:
-        recipients:
-          - estev97@gmail.com
+      # email:
+      #   recipients:
+      #     - estev97@gmail.com
           # - meedu.app@gmail.com
       app_store_connect:
-         auth: integration
+         api_key: $APP_STORE_CONNECT_PRIVATE_KEY,
+         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER,
+         issuer_id: $APP_STORE_CONNECT_ISSUER_ID,
+         
          submit_to_testflight: true
          
