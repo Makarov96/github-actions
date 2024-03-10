@@ -5,7 +5,7 @@ workflows:
       ios_signing:
          distribution_type: app_store
          provisioning_profiles:
-           - StevenProfileRefProd
+           - StevenProfileRef
         # certificates:
         #   - Sample
         #  bundle_identifier: com.stevencol.sample
@@ -51,10 +51,11 @@ workflows:
       # - name: FLUTTER CREATE APK
       #   script: flutter build apk --release --dart-define-from-file=env/prod.json
       - name: FLUTTER CREATE IPA
-        script: flutter build ipa --release --dart-define-from-file=env/prod.json
+        script: flutter build ipa --export-options-plist=/Users/builder/export_options.plist --dart-define-from-file=env/prod.json
 
-    # artifacts:
-    #   - build/app/outputs/flutter-apk/app-release.apk
+    artifacts:
+        - build/ios/ipa/*.ipa
+      # - build/app/outputs/flutter-apk/app-release.apk
 
     integrations:
       app_store_connect: steven-colocho-apple-store
