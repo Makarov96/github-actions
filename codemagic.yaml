@@ -2,9 +2,9 @@ workflows:
   hello-world:
     environment:
       flutter: stable
-      # ios_signing:
-      #   distribution_type: app_store
-      #   bundle_identifier: com.example.sample
+      ios_signing:
+        distribution_type: app_store
+        # bundle_identifier: com.example.sample
 
       groups:
         - "appstore_credentials"
@@ -27,7 +27,6 @@ workflows:
         script: keychain add-certificates
       - name: USE PROFILES
         script: xcode-project use-profiles
-        
       - name: Hello world
         script: echo 'change message'
 
