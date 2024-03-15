@@ -79,7 +79,7 @@ jobs:
         with:
           serviceCredentialsFileContent: ${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}
           appId: "1:854347906923:ios:1c7192e6ec5406ed01962e"
-          file: "build/ios/ipa" # e.g., './build/app/outputs/flutter-apk/app-release.apk'
+          file: "./build/ios/ipa" # e.g., './build/app/outputs/flutter-apk/app-release.apk'
           groups: "testers"
 
       - name: FLUTTER GENERATE APK
