@@ -18,7 +18,7 @@ jobs:
         run: npm install -g firebase-tools
 
       - name: AUTH
-        run: firebase login:ci --interactive --no-localhost
+        run: firebase login --interactive
 
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
