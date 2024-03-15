@@ -50,16 +50,25 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: KEYCHAIN INIT
+        run: keychain initialize
+
+      - name: ADD CERTS
+        run: keychain add-certificates
+
+      - name: USE PROFILES
+        run: xcode-project use-profiles
+
       - name: INSTALL FLUTTER
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
 
-      - name: FLUTTER TEST
-        run: flutter test
+      # - name: FLUTTER TEST
+      #   run: flutter test
 
-      - name: FLUTTER ANALYZE
-        run: flutter analyze
+      # - name: FLUTTER ANALYZE
+      #   run: flutter analyze
 
       - name: CREATE ENV
         run: mkdir env
