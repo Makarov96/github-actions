@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sample/core/environment/environment.dart';
+import 'package:sample/firebase_options.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  DefaultFirebaseOptions();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

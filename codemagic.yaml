@@ -6,10 +6,6 @@ workflows:
          distribution_type: app_store
          provisioning_profiles:
            - StevenProfileRefProd
-        # certificates:
-        #   - Sample
-        #  bundle_identifier: com.stevencol.sample
-
       groups:
         - "appstore_credentials"
 
@@ -27,12 +23,12 @@ workflows:
 
       - name: KEYCHAIN INIT
         script: keychain initialize
+
       - name: ADD CERTS
         script: keychain add-certificates
+
       - name: USE PROFILES
         script: xcode-project use-profiles
-      - name: Hello world
-        script: echo 'change message'
 
       - name: CREATE ENV
         script: mkdir env
@@ -67,9 +63,7 @@ workflows:
           # - meedu.app@gmail.com
       app_store_connect:
          auth: integration
-        #  api_key: $APP_STORE_CONNECT_PRIVATE_KEY,
-        #  key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER,
-        #  issuer_id: $APP_STORE_CONNECT_ISSUER_ID,
-         
+
+
          submit_to_testflight: true
-         
+

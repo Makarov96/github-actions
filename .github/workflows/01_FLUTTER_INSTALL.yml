@@ -49,28 +49,27 @@ jobs:
 
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-      - name: Provision Information sfsdfsdfsdfsdfsd
-        run: echo "all is alread"
-      # - name: INSTALL FLUTTER
-      #   uses: subosito/flutter-action@v2
-      #   with:
-      #     channel: "stable"
 
-      # - name: FLUTTER TEST
-      #   run: flutter test
+      - name: INSTALL FLUTTER
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
 
-      # - name: FLUTTER ANALYZE
-      #   run: flutter analyze
+      - name: FLUTTER TEST
+        run: flutter test
 
-      # - name: CREATE ENV
-      #   run: mkdir env
+      - name: FLUTTER ANALYZE
+        run: flutter analyze
 
-      # - name: CREATE DEV.JSON
-      #   run: echo '{"name":"${{vars.REGARD}}"}' > dev.json
-      #   working-directory: env
+      - name: CREATE ENV
+        run: mkdir env
 
-      # - name: FLUTTER GENERATE APK
-      #   run: flutter build apk --release --dart-define-from-file=env/dev.json
+      - name: CREATE DEV.JSON
+        run: echo '{"name":"${{vars.REGARD}}"}' > dev.json
+        working-directory: env
+
+      - name: FLUTTER GENERATE APK
+        run: flutter build ipa --release --dart-define-from-file=env/dev.json
 
       # - name: UPLOAD APK
       #   uses: actions/upload-artifact@v4
