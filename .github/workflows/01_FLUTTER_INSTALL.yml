@@ -119,7 +119,8 @@ jobs:
           appId: 1:854347906923:android:d2cf5303b74d564701962e
           file: ./app/outputs/flutter-apk/app-release.apk
           groups: testers
-          token: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
+          serviceCredentialsFileContent: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
+
   # flutter-masters-deploy-dev:
   #   runs-on: macos-latest
   #   environment: "production"
