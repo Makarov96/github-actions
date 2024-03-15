@@ -18,6 +18,8 @@ jobs:
 
       - name: Authenticate with Firebase
         run: firebase login:ci --interactive --no-localhost
+        env:
+          FIREBASE_TOKEN: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
 
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
