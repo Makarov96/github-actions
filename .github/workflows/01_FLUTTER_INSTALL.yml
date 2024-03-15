@@ -38,7 +38,6 @@ jobs:
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
 
-
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -70,7 +69,7 @@ jobs:
         working-directory: env
 
       - name: FLUTTER GENERATE APK
-        run: flutter build ipa --release --export-options-plist=/Users/builder/ExportOptions.plist --dart-define-from-file=env/dev.json
+        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist --dart-define-from-file=env/dev.json
 
       # - name: UPLOAD APK
       #   uses: actions/upload-artifact@v4
