@@ -84,10 +84,6 @@ jobs:
         run: |
           echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
 
-      - name: Use Firebase Dev
-        shell: bash
-        run: |
-          firebase use dev --debug
       - name: UPLOAD IPA TO APP DISTRIBUTION
         run: |
           firebase appdistribution:distribute build/ios/ipa/sample.ipa  \
