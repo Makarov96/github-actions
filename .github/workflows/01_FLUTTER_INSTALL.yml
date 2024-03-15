@@ -96,9 +96,10 @@ jobs:
     needs: flutter-masters-deploy-prod
     steps:
       - name: DOWLOAD ARTIFACTS
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: apk-ipa-for-test
+          github-token: ${{secrets.GITHUB_TOKEN}}
       - name: Display structure of downloaded files
         run: ls -R
 
