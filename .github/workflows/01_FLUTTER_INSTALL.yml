@@ -82,9 +82,6 @@ jobs:
           file: "build/ios/ipa" # e.g., './build/app/outputs/flutter-apk/app-release.apk'
           groups: "testers"
 
-      - name: Upload APK to Firebase Distribution
-        run: firebase appdistribution:distribute build/ios/ipa --app '1:854347906923:ios:1c7192e6ec5406ed01962e' --token ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
-
       - name: FLUTTER GENERATE APK
         run: flutter build apk --release  --dart-define-from-file=env/dev.json
 
