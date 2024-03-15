@@ -28,6 +28,7 @@ jobs:
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          APP_DISTRIBUTION_ACCESS: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
@@ -57,11 +58,11 @@ jobs:
         with:
           channel: "stable"
 
-      # - name: FLUTTER TEST
-      #   run: flutter test
+      - name: FLUTTER TEST
+        run: flutter test
 
-      # - name: FLUTTER ANALYZE
-      #   run: flutter analyze
+      - name: FLUTTER ANALYZE
+        run: flutter analyze
 
       - name: CREATE ENV
         run: mkdir env
@@ -76,13 +77,30 @@ jobs:
       - name: FLUTTER GENERATE APK
         run: flutter build apk --release  --dart-define-from-file=env/dev.json
 
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+
       - name: UPLOAD APK
         uses: actions/upload-artifact@v4
         with:
-          name: apk-for-test
+          name: apk-ipa-for-test
           path: |
             build/ios/ipa
             build/app/outputs/flutter-apk/app-release.apk
+
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: "1:854347906923:ios:1c7192e6ec5406ed01962e"
+
+          serviceCredentialsFileContent: |
+            "$APP_DISTRIBUTION_ACCESS" | base64 --decode
+
+          groups: testers
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
 
   # flutter-masters-deploy-dev:
   #   runs-on: macos-latest
