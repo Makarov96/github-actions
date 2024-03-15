@@ -96,8 +96,7 @@ jobs:
         with:
           appId: "1:854347906923:ios:1c7192e6ec5406ed01962e"
 
-          serviceCredentialsFileContent: |
-            "$APP_DISTRIBUTION_ACCESS" | base64 --decode
+          serviceCredentialsFileContent: "$APP_DISTRIBUTION_ACCESS"
 
           groups: testers
           file: app/build/outputs/apk/release/app-release-unsigned.apk
