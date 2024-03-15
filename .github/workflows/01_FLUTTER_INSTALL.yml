@@ -109,7 +109,7 @@ jobs:
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: 1:854347906923:ios:1c7192e6ec5406ed01962e
-          file: build/ios/ipa
+          file: ./ios/ipa/sample.ipa
           groups: testers
           token: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
 
