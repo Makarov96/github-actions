@@ -85,7 +85,7 @@ jobs:
           echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
 
       - name: UPLOAD IPA TO APP DISTRIBUTION
-        run: firebase appdistribution:distribute /Users/runner/work/github-actions/github-actions/build/ios/ipa/sample.ipa --app 1:854347906923:android:d2cf5303b74d564701962e --release-notes "Bug fixes and improvements" --groups "testers"
+        run: firebase appdistribution:distribute /Users/runner/work/github-actions/github-actions/build/ios/ipa/sample.ipa --app 1:854347906923:android:d2cf5303b74d564701962e --groups "testers"
 
       - name: FLUTTER GENERATE APK
         run: flutter build apk --release  --dart-define-from-file=env/dev.json
