@@ -51,7 +51,11 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
           cd ~/Library/MobileDevice/Provisioning\ Profiles && ls
-
+      - name: using profile
+        run: |
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > /tmp/build_pp.mobileprovision
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp /tmp/build_pp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
       - name: INSTALL FLUTTER
         uses: subosito/flutter-action@v2
         with:
