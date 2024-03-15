@@ -105,7 +105,7 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
-      - name: Upload artifact to Firebase App Distribution
+      - name: Upload IPA TO APP DISTRIBUTION
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: 1:854347906923:ios:1c7192e6ec5406ed01962e
@@ -113,6 +113,13 @@ jobs:
           groups: testers
           token: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
 
+      - name: Upload APK TO APP DISTRIBUTION
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: 1:854347906923:android:d2cf5303b74d564701962e
+          file: ./app/outputs/flutter-apk/app-release.apk
+          groups: testers
+          token: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
   # flutter-masters-deploy-dev:
   #   runs-on: macos-latest
   #   environment: "production"
