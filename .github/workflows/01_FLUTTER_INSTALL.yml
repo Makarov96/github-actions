@@ -52,17 +52,6 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-          cd ~/Library/MobileDevice/Provisioning\ Profiles && ls
-      - name: using profile dev
-        run: |
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > /tmp/build_pp.mobileprovision
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp /tmp/build_pp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
-      - name: using profile dev
-        run: |
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64_PROD" | base64 --decode > /tmp/build_pp.mobileprovision
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp /tmp/build_pp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
       - name: INSTALL FLUTTER
         uses: subosito/flutter-action@v2
         with:
@@ -82,7 +71,7 @@ jobs:
         working-directory: env
 
       - name: FLUTTER GENERATE APK
-        run: flutter build ipa --release --export-options-plist=ios/Runner/Info.plist --dart-define-from-file=env/dev.json
+        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist --dart-define-from-file=env/dev.json
 
       # - name: UPLOAD APK
       #   uses: actions/upload-artifact@v4
