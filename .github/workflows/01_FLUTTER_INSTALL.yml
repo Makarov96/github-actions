@@ -9,6 +9,7 @@ on:
 jobs:
   flutter-masters-deploy-prod:
     runs-on: macos-latest
+
     env:
       public_variable: ${{vars.REGARD}}
       secret_variable: ${{secrets.PASSWORD}}
@@ -100,6 +101,7 @@ jobs:
         with:
           name: apk-ipa-for-test
           github-token: ${{secrets.GITHUB_TOKEN}}
+          repository: ${{github.repository}}
       - name: Display structure of downloaded files
         run: ls -R
 
