@@ -27,7 +27,6 @@ jobs:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
-          BUILD_PROVISION_PROFILE_BASE64_PROD: ${{ secrets.BUILD_PROVISION_PROFILE_PROD_BASE_64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
 
@@ -37,7 +36,7 @@ jobs:
 
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64_PROD" | base64 --decode -o $PP_PATH
+
 
 
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
