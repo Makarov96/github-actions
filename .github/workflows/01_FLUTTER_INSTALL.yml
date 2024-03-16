@@ -18,6 +18,11 @@ jobs:
       - name: INSTALL FIREBASE
         run: npm install -g firebase-tools
 
+      - name: Prepare Google Application Credentials
+        shell: bash
+        run: |
+          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
+
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
         with:
@@ -79,14 +84,6 @@ jobs:
       - name: FLUTTER GENERATE IPA
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist --dart-define-from-file=env/dev.json
 
-      - name: Prepare Google Application Credentials
-        shell: bash
-        run: |
-          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
-
-      - name: UPLOAD IPA TO APP DISTRIBUTION
-        run: firebase appdistribution:distribute build/ios/ipa/sample.ipa --app 1:854347906923:ios:1c7192e6ec5406ed01962e --groups "testers"
-
       - name: FLUTTER GENERATE APK
         run: flutter build apk --release  --dart-define-from-file=env/dev.json
 
@@ -95,6 +92,11 @@ jobs:
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+
+      - name: UPLOAD IPA TO APP DISTRIBUTION
+        run: firebase appdistribution:distribute build/ios/ipa/sample.ipa --app 1:854347906923:ios:1c7192e6ec5406ed01962e --groups "testers"
+      - name: UPLOAD IPA TO APP DISTRIBUTION
+        run: firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app 1:854347906923:android:d2cf5303b74d564701962e --groups "testers"
 
       - name: UPLOAD APK
         uses: actions/upload-artifact@v4
