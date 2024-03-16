@@ -18,11 +18,6 @@ jobs:
       - name: INSTALL FIREBASE
         run: npm install -g firebase-tools
 
-      - name: Prepare Google Application Credentials
-        shell: bash
-        run: |
-          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
-
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
         with:
@@ -92,6 +87,11 @@ jobs:
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+
+      - name: Prepare Google Application Credentials
+        shell: bash
+        run: |
+          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
 
       - name: UPLOAD IPA TO APP DISTRIBUTION
         run: firebase appdistribution:distribute build/ios/ipa/sample.ipa --app 1:854347906923:ios:1c7192e6ec5406ed01962e --groups "testers"
