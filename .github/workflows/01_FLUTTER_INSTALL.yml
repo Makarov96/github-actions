@@ -95,14 +95,14 @@ jobs:
 
       - name: UPLOAD IPA TO APP DISTRIBUTION
         run: |
-          firebase appdistribution:distribute /build/ios/ipa/sample.ipa \
-          --app 1:854347906923:ios:1c7192e6ec5406ed01962e \
+          firebase appdistribution:distribute /build/ios/ipa/sample.ipa
+          --app 1:854347906923:ios:1c7192e6ec5406ed01962e
           --groups "testers"
 
       - name: UPLOAD APK TO APP DISTRIBUTION
         run: |
-          firebase appdistribution:distribute /build/app/outputs/flutter-apk/app-release.apk \
-          --app 1:854347906923:android:d2cf5303b74d564701962e \
+          firebase appdistribution:distribute /build/app/outputs/flutter-apk/app-release.apk
+          --app 1:854347906923:android:d2cf5303b74d564701962e
           --groups "testers"
       - name: UPLOAD APK
         uses: actions/upload-artifact@v4
