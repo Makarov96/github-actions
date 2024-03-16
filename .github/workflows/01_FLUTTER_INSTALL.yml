@@ -18,6 +18,11 @@ jobs:
       - name: INSTALL FIREBASE
         run: npm install -g firebase-tools
 
+      - name: Prepare Google Application Credentials
+        shell: bash
+        run: |
+          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
+
       - name: INSTALLING JAVA
         uses: actions/setup-java@v4
         with:
@@ -78,11 +83,6 @@ jobs:
 
       - name: FLUTTER GENERATE IPA
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist --dart-define-from-file=env/dev.json
-
-      - name: Prepare Google Application Credentials
-        shell: bash
-        run: |
-          echo "${{ secrets.JSON_APP_DISTRIBUTION_ACCESS }}" | base64 --decode > "google-application-credentials.json"
 
       - name: FLUTTER GENERATE APK
         run: flutter build apk --release  --dart-define-from-file=env/dev.json
