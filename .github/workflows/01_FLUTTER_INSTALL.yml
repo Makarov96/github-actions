@@ -73,8 +73,7 @@ jobs:
         run: mkdir env
 
       - name: CREATE DEV.JSON
-        run: echo '{"name":"${{vars.REGARD}}"}' > dev.json
-        working-directory: env
+        run: echo '{"name":"${{vars.REGARD}}"}' > env/dev.json
 
       - name: FLUTTER GENERATE IPA
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist --dart-define-from-file=env/dev.json
@@ -105,78 +104,3 @@ jobs:
           path: |
             build/ios/ipa
             build/app/outputs/flutter-apk/app-release.apk
-
-  # upload_ipa_apk:
-  #   runs-on: ubuntu-latest
-  #   needs: flutter-masters-deploy-prod
-  #   steps:
-  #     - name: DOWLOAD ARTIFACTS
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: apk-ipa-for-test
-  #         github-token: ${{secrets.GITHUB_TOKEN}}
-  #         repository: ${{github.repository}}
-  #     - name: Display structure of downloaded files
-  #       run: ls -R
-
-  #     - name: Upload IPA TO APP DISTRIBUTION
-  #       uses: wzieba/Firebase-Distribution-Github-Action@v1
-  #       with:
-  #         appId: 1:854347906923:ios:1c7192e6ec5406ed01962e
-  #         file: ./ios/ipa/sample.ipa
-  #         groups: testers
-  #         token: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
-
-  #     - name: Upload APK TO APP DISTRIBUTION
-  #       uses: wzieba/Firebase-Distribution-Github-Action@v1
-  #       with:
-  #         appId: 1:854347906923:android:d2cf5303b74d564701962e
-  #         file: ./app/outputs/flutter-apk/app-release.apk
-  #         groups: testers
-  #         serviceCredentialsFileContent: ${{secrets.JSON_APP_DISTRIBUTION_ACCESS}}
-
-  # flutter-masters-deploy-dev:
-  #   runs-on: macos-latest
-  #   environment: "production"
-  #   env:
-  #     public_variable: ${{vars.REGARD}}
-  #     secret_variable: ${{secrets.PASSWORD}}
-  #   steps:
-  #     - name: INSTALLING JAVA
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         distribution: "temurin"
-  #         java-version: "11"
-
-  #     - name: COPY .
-  #       uses: actions/checkout@v4
-
-  #     - name: INSTALL FLUTTER
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         channel: "stable"
-
-  #     - name: FLUTTER TEST
-  #       run: flutter test
-
-  #     - name: FLUTTER ANALYZE
-  #       run: flutter analyze
-
-  #     - name: CREATE ENV
-  #       run: mkdir env
-
-  #     - name: CREATE PROD.JSON
-  #       run: echo '{"name":"${{vars.REGARD}}"}' > prod.json
-  #       working-directory: env
-
-  #     - name: FLUTTER GENERATE IPA
-  #       run: flutter build ipa --no-codesign --dart-define-from-file=env/prod.json
-
-  #     # - name: FLUTTER GENERATE IPA
-  #     #   run: flutter build ipa --no-codesign --export-options-plist="build/ios/archive/Runner.xcarchive/info.plist"
-
-  #     - name: UPLOAD IPA
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ipa-for-test
-  #         path: build/ios/archive/
